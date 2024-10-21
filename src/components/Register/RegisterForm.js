@@ -7,8 +7,9 @@ import {
   Box,
   Divider,
   Alert,
+  Link,
 } from "@mui/material";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link as RouterLink } from "react-router-dom";
 
 const RegisterForm = () => {
   const [username, setUsername] = useState("");
@@ -154,6 +155,16 @@ const RegisterForm = () => {
         </form>
 
         <Divider sx={{ my: 2 }} />
+        <Typography variant="body2" align="center" sx={{ mt: 2 }}>
+          Already have an account?{" "}
+          <Link
+            component={RouterLink}
+            to="/"
+            style={{ textDecoration: "none", color: "#1976d2" }}
+          >
+            Back to login
+          </Link>
+        </Typography>
       </Box>
     </Container>
   );
