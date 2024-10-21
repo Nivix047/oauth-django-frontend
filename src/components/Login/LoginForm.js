@@ -6,6 +6,7 @@ import {
   Typography,
   Box,
   Divider,
+  Alert, // To display error messages
 } from "@mui/material";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
@@ -14,6 +15,7 @@ import GitHubIcon from "@mui/icons-material/GitHub"; // GitHub icon from Materia
 const LoginForm = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const [errorMessage, setErrorMessage] = useState(""); // State to store error message
   const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
@@ -29,7 +31,12 @@ const LoginForm = () => {
       localStorage.setItem("token", response.data.token);
       navigate("/dashboard"); // Redirect after successful login
     } catch (error) {
-      console.error("Login failed:", error);
+      // Capture the error and set the error message
+      if (error.response && error.response.data) {
+        setErrorMessage(error.response.data.error); // Assuming the backend sends error in {error: "Invalid password"} format
+      } else {
+        setErrorMessage("An error occurred. Please try again.");
+      }
     }
   };
 
@@ -47,6 +54,14 @@ const LoginForm = () => {
         <Typography variant="h4" gutterBottom align="center">
           Login
         </Typography>
+
+        {/* Show error message if there's any */}
+        {errorMessage && (
+          <Alert severity="error" sx={{ mb: 2 }}>
+            {errorMessage}
+          </Alert>
+        )}
+
         <form onSubmit={handleSubmit}>
           <Typography variant="body1" gutterBottom>
             Username
@@ -93,7 +108,7 @@ const LoginForm = () => {
           <Button
             variant="outlined"
             startIcon={<GitHubIcon />}
-            href="https://github.com/login/oauth/authorize"
+            href="http://localhost:8000/auth/login/github/"
             fullWidth
           >
             GitHub
