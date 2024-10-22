@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import axios from "axios";
 import {
   Button,
   TextField,
@@ -24,8 +25,11 @@ const RegisterForm = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      // Log the data being sent to ensure it's correct
-      console.log({
+      // Clear any previous error messages
+      setErrorMessage("");
+
+      // Make API call to register the user
+      const response = await axios.post("http://localhost:8000/register/", {
         username,
         first_name: firstName,
         last_name: lastName,
@@ -33,8 +37,7 @@ const RegisterForm = () => {
         password,
       });
 
-      // Clear any error messages
-      setErrorMessage("");
+      console.log("Registration successful", response.data);
 
       // Show success message and redirect
       setSuccessMessage("Registration successful! Redirecting to login...");
