@@ -1,70 +1,65 @@
-# Getting Started with Create React App
+# Fullstack User Authentication and Dashboard Template
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Overview
 
-## Available Scripts
+This project is a **full-stack template** built with **React** and **Material-UI (MUI)** on the frontend, and **Django** on the backend. It includes a user creation page, login page (with OAuth integration for GitHub), and a dashboard. This template is ready to be scaled and can serve as the foundation for a variety of web applications.
 
-In the project directory, you can run:
+The backend for this template, built with Django, can be found [here](https://github.com/Nivix047/oauth-django).
 
-### `npm start`
+## Features
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+- **User Registration**: Allows users to create a new account.
+- **User Login**: Provides a login form with password authentication.
+- **OAuth Login**: Offers a GitHub OAuth login integration.
+- **Dashboard**: A placeholder dashboard page where additional content or features can be added.
+- **Logout**: Clears authentication tokens and redirects users to the login page.
+- **Responsive Design**: Built using Material UI components to ensure responsiveness across devices.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## Tech Stack
 
-### `npm test`
+### Frontend:
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+- **React**: A JavaScript library for building user interfaces.
+- **Material-UI (MUI)**: A popular React UI framework for fast and simple design.
+- **React Router**: For navigating between pages in the app.
+- **Axios**: For making API requests to the backend.
 
-### `npm run build`
+### Backend (not included in this repo):
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+- **Django**: Python web framework that powers the backend, handling user creation, authentication, and OAuth.
+- **Django REST Framework**: For building REST APIs to communicate with the frontend.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+## Getting Started
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+### Prerequisites
 
-### `npm run eject`
+- Node.js installed (you can use `nvm` to manage Node.js versions).
+- A running Django backend with user authentication (including OAuth for GitHub). You can find the backend repository [here](https://github.com/your-backend-repo).
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+### Setup Instructions
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+1. Install dependencies using your preferred package manager.
+2. Configure the backend URL:
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+   - The frontend expects the Django backend to run on `http://localhost:8000`.
+   - If your backend is running on a different URL, update the Axios requests in the components like `LoginForm.js` and `RegisterForm.js`.
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+3. Run the React app in your local environment.
 
-## Learn More
+### Django Backend
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+The backend is powered by Django and should include endpoints for:
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+- **User registration**: Handles new user signups.
+- **User login**: Authenticates users and returns a token.
+- **OAuth login**: Allows users to log in with GitHub via OAuth.
 
-### Code Splitting
+Make sure your Django backend is configured with CORS settings to allow requests from the React frontend (e.g., using `django-cors-headers`), and that it's running on `localhost:8000` or whatever URL your Axios calls are pointing to.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+## Deployment
 
-### Analyzing the Bundle Size
+To deploy both the frontend and backend on the same EC2 instance using Docker:
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+1. **Containerize the Frontend**: Create a Dockerfile for the frontend and build the image.
+2. **Containerize the Backend**: Create a Dockerfile for the Django backend.
+3. **Deploy on EC2**: Use Docker Compose or standalone Docker containers to deploy both the frontend and backend on the same EC2 instance.
