@@ -97,7 +97,7 @@ const LoginForm = () => {
         <Divider sx={{ my: 2 }} />
 
         <Typography variant="body1" align="center">
-          or sign up with
+          or log in with
         </Typography>
 
         {/* GitHub icon button for OAuth */}
