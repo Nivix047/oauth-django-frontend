@@ -29,20 +29,23 @@ const RegisterForm = () => {
       setErrorMessage("");
 
       // Make API call to register the user
-      const response = await axios.post("http://localhost:8000/register/", {
-        username,
-        first_name: firstName,
-        last_name: lastName,
-        email,
-        password,
-      });
+      const response = await axios.post(
+        "http://localhost:8000/api/v1/users/register/",
+        {
+          username,
+          first_name: firstName,
+          last_name: lastName,
+          email,
+          password,
+        }
+      );
 
       console.log("Registration successful", response.data);
 
       // Show success message and redirect
       setSuccessMessage("Registration successful! Redirecting to login...");
       setTimeout(() => {
-        navigate("/login");
+        navigate("/dashboard");
       }, 2000);
     } catch (error) {
       // Log the error for debugging
